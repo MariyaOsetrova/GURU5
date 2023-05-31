@@ -1,0 +1,36 @@
+//альтернатива Maven
+//системы сборки проектов
+//конфигурационный файла для открытия google их первого занятия
+//Gradle — система автоматической сборки, которую используют для упрощения работы с Java.
+// синтаксис груви
+// junit фреймворк для написания тестов
+plugins {
+    id 'java-library'
+}
+// самый большой сборник библиотек java
+repositories {
+    mavenCentral()
+}
+
+//в исходных кодах использует русский текст, кодировка
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+//какаю версию используем java
+sourceCompatibility = 11
+targetCompatibility = 11
+
+dependencies { //зависимости. последнии версии смотрим тут https://search.maven.org/search?q=selenide
+    //https://search.maven.org/artifact/org.slf4j/slf4j-simple
+    //selenide
+    testImplementation("com.codeborne:selenide:5.21.0") // фреймворк, обертка для selenium
+    testRuntimeOnly("org.slf4j:slf4j-simple:1.7.30")//включает больше логирования
+    //juni5 библиотеки
+    // JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")// библиотека для использования анотаций
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")// библиотека для запуска из командной строки
+}
+//использование juni5
+test {
+    useJUnitPlatform()
+}
