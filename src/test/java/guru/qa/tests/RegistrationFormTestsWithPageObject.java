@@ -1,7 +1,6 @@
 package guru.qa.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import guru.qa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -10,13 +9,14 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static guru.qa.tests.TestData.firstName;
 import static guru.qa.tests.TestData.lastName;
 
 //import static guru.qa.tests.TestData;
 
-public class RegistrationFormTests5Lessons extends TestBase{
+public class RegistrationFormTestsWithPageObject extends TestBase{
+    // PageObject ОПИСЫВАЕМ СТРАНИЦУ КАК ОБЪЕКТ
+
     /*
     убрали в TestBase, и наследуем из него
     @BeforeAll
@@ -26,6 +26,8 @@ public class RegistrationFormTests5Lessons extends TestBase{
     }
     */
 
+RegistrationPage registrationPage = new RegistrationPage();
+
     @Test
 
     public void practiceForm(){
@@ -34,8 +36,10 @@ public class RegistrationFormTests5Lessons extends TestBase{
 // проверка что страница открылась
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         */
-        $("#firstName").setValue(firstName); // убрали в отдельный класс TestData
-        $("#lastName").setValue(TestData.lastName); // или так,  убрали в отдельный класс TestData
+        registrationPage.openPage(); // dspdfkb nj nxj e,hfkb
+
+        registrationPage.typeFirstName(firstName);        // $("#firstName").setValue(firstName);
+        registrationPage.typeLastName(lastName);//    $("#lastName").setValue(TestData.lastName);
         $("#userEmail").setValue("male@mail.ru");
         //  $(byText("Привет"));
         $("#genterWrapper").$(byText("Male")).click(); // добавили клнкретики
