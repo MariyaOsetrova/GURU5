@@ -1,7 +1,6 @@
 package guru.qa.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import guru.qa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -10,13 +9,12 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static guru.qa.tests.TestData.firstName;
-import static guru.qa.tests.TestData.lastName;
+import static guru.qa.utils.RandomUtils.getRandomString;
 
 //import static guru.qa.tests.TestData;
 
-public class RegistrationFormTests5Lessons extends TestBase{
+public class RegistrationFormWithRandomUtilsTests extends TestBase{
     /*
     убрали в TestBase, и наследуем из него
     @BeforeAll
@@ -25,17 +23,25 @@ public class RegistrationFormTests5Lessons extends TestBase{
         Configuration.pageLoadStrategy = ("none");
     }
     */
+    RegistrationPage registrationPage = new RegistrationPage();
+    String firstName = getRandomString(10),
+            lastName = getRandomString(10);
 
     @Test
 
-    public void practiceForm(){
+    public void practiceForm() {
         /* Убрали в отдельный класс guru.qa.pages.RegistrationPage
         open("https://demoqa.com/automation-practice-form");
 // проверка что страница открылась
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         */
-        $("#firstName").setValue(firstName); // убрали в отдельный класс TestData
-        $("#lastName").setValue(TestData.lastName); // или так,  убрали в отдельный класс TestData
+        registrationPage.openPage();
+
+        //сделаем рандомное заполнение
+        $("#firstName").setValue(firstName); // рандомно заполнеям, выше инициализация
+        $("#lastName").setValue(lastName); // рандомно заполнеям, выше инициализация
+
+
         $("#userEmail").setValue("male@mail.ru");
         //  $(byText("Привет"));
         $("#genterWrapper").$(byText("Male")).click(); // добавили клнкретики

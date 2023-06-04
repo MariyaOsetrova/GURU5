@@ -23,7 +23,8 @@ targetCompatibility = 11
 dependencies { //зависимости. последнии версии смотрим тут https://search.maven.org/search?q=selenide
     //https://search.maven.org/artifact/org.slf4j/slf4j-simple
     //selenide
-    testImplementation("com.codeborne:selenide:5.21.0") // фреймворк, обертка для selenium
+    testImplementation("com.codeborne:selenide:5.24.0", // фреймворк, обертка для selenium
+                       "com.github.javafaker:javafaker:1.0.2") // подключение крутого рандомайзера
     testRuntimeOnly("org.slf4j:slf4j-simple:1.7.30")//включает больше логирования
     //juni5 библиотеки
     // JUnit 5

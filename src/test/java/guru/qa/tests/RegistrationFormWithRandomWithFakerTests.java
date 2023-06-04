@@ -1,7 +1,7 @@
 package guru.qa.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import com.github.javafaker.Faker;
+import guru.qa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -10,13 +10,11 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static guru.qa.tests.TestData.firstName;
-import static guru.qa.tests.TestData.lastName;
+import static guru.qa.utils.RandomUtils.getRandomString;
 
 //import static guru.qa.tests.TestData;
 
-public class RegistrationFormTests5Lessons extends TestBase{
+public class RegistrationFormWithRandomWithFakerTests extends TestBase{
     /*
     убрали в TestBase, и наследуем из него
     @BeforeAll
@@ -25,23 +23,36 @@ public class RegistrationFormTests5Lessons extends TestBase{
         Configuration.pageLoadStrategy = ("none");
     }
     */
+    RegistrationPage registrationPage = new RegistrationPage(); // для открытия окна
+    // добавили зависимость в гредл на проффесиональный рандомайзер и используем его возможности
+    Faker faker = new Faker();
+    String firstName = faker.name().firstName(),
+            lastName = faker.name().lastName(),
+            userEmail = faker.internet().emailAddress(),
+            currentAddres = faker.lebowski().quote();
+
 
     @Test
 
-    public void practiceForm(){
+    public void practiceForm() {
         /* Убрали в отдельный класс guru.qa.pages.RegistrationPage
         open("https://demoqa.com/automation-practice-form");
 // проверка что страница открылась
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         */
-        $("#firstName").setValue(firstName); // убрали в отдельный класс TestData
-        $("#lastName").setValue(TestData.lastName); // или так,  убрали в отдельный класс TestData
-        $("#userEmail").setValue("male@mail.ru");
+        registrationPage.openPage();
+
+        //сделаем рандомное заполнение
+        $("#firstName").setValue(firstName); // рандомно заполнеям, выше инициализация
+        $("#lastName").setValue(lastName); // рандомно заполнеям, выше инициализация
+
+
+        $("#userEmail").setValue(userEmail);
         //  $(byText("Привет"));
         $("#genterWrapper").$(byText("Male")).click(); // добавили клнкретики
         //или так
         //$("#gender-radio-1").parent().click();
-        $("#userNumber").setValue("123456789");
+        $("#userNumber").setValue("9159852374");
         $("#dateOfBirthInput").click();
 
         $(byClassName("react-datepicker__month-select")).click();
@@ -77,7 +88,7 @@ public class RegistrationFormTests5Lessons extends TestBase{
         // еще способ
         //  $("#uploadPicture").uploadFromClasspath("src/test/data/Снимок.JPG");
 
-        $("#currentAddress").setValue("Адрес1");
+        $("#currentAddress").setValue(currentAddres);
 
         // выбор из раскрывающегося выпадающего списка
         $("#state").click();
@@ -88,8 +99,8 @@ public class RegistrationFormTests5Lessons extends TestBase{
         $("#submit").click();
 
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Имя Фамилия"),
-                text("male@mail.ru"), text("16 April,1989"));
+        $(".table-responsive").shouldHave(text(firstName + " " + lastName),
+                text(userEmail), text("16 April,1989"), text(currentAddres));
 
     }
 }

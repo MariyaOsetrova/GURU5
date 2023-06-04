@@ -9,10 +9,9 @@ package guru.qa.tests;
         import static com.codeborne.selenide.Condition.text;
         import static com.codeborne.selenide.Selectors.byClassName;
         import static com.codeborne.selenide.Selectors.byText;
-        import static com.codeborne.selenide.Selenide.$;
-        import static com.codeborne.selenide.Selenide.open;
+        import static com.codeborne.selenide.Selenide.*;
 
-        public class RegistrationFormTests5DoLessons5 {
+public class RegistrationFormTests5DoLessons5 {
         @BeforeAll
         static void beforAll(){
         Configuration.startMaximized = true; // запуск теста в развернутом окне
@@ -71,13 +70,16 @@ package guru.qa.tests;
         $("#state").click();
         // СКРОЛ!!!! . ЕСЛИ НЕ СКРОЛИТ!!!!       $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
-
+                $("#city").click();
         $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
 
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Имя Фамилия"),
         text("male@mail.ru"), text("16 April,1989"));
-
+                $(".table-responsive").$(byText("Student Name")).shouldHave(text("Имя Фамилия"));
+                $(".table-responsive").$(byText("Email")).shouldHave(text("male@mail.ru"));
+                $x("//td[text()='Student Name']").parent()
+                        .shouldHave(text("male@mail.ru"));
         }
         }

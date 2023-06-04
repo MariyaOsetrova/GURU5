@@ -38,24 +38,26 @@ RegistrationPage registrationPage = new RegistrationPage();
         */
         registrationPage.openPage(); // dspdfkb nj nxj e,hfkb
 
-        registrationPage.typeFirstName(firstName);        // $("#firstName").setValue(firstName);
-        registrationPage.typeLastName(lastName);//    $("#lastName").setValue(TestData.lastName);
+        registrationPage.typeFirstName(firstName)       // $("#firstName").setValue(firstName);
+                        .typeLastName(lastName);//    $("#lastName").setValue(TestData.lastName); + в pages добавиди return this; //вернутся назад и можно опять вызывать методы
         $("#userEmail").setValue("male@mail.ru");
         //  $(byText("Привет"));
         $("#genterWrapper").$(byText("Male")).click(); // добавили клнкретики
         //или так
         //$("#gender-radio-1").parent().click();
-        $("#userNumber").setValue("123456789");
-        $("#dateOfBirthInput").click();
+        $("#userNumber").setValue("9159852374");
 
+
+        registrationPage.calendarComponent.setDate("16", "April", "1989" );
+        // работа с календарем, убрали в отдельный метод - компонент
+        /*
+        $("#dateOfBirthInput").click();
         $(byClassName("react-datepicker__month-select")).click();
         $(byClassName("react-datepicker__month-select")).$(byText("April")).click();
         // либо две строки выше так      $(byClassName("react-datepicker__month-select")).selectOption("April");
-
         $(byClassName("react-datepicker__year-select")).click();
         $(byClassName("react-datepicker__year-select")).$(byText("1989")).click();
         // либо две строки выше так      $(byClassName("react-datepicker__year-select")).selectOption("1989");
-
         $("div[aria-label='Choose Sunday, April 16th, 1989']").click();
         // еще способы, если например в месеце раскрытом, есть 2 одинаковые даты, например 28 при выборе апрель 1989
 //class="react-datepicker__day react-datepicker__day--028 react-datepicker__day--outside-month"
@@ -64,7 +66,7 @@ RegistrationPage registrationPage = new RegistrationPage();
 //        $(".react-datepicker__day--028:not(.react-datepicker__day--outside-month)").click();
         // способ 2, исключение с not
 //        $$(".react-datepicker__day--028").filter(not(cssClass("react-datepicker__day--outside-month"))).first().click();
-
+*/
 
         // выбор из выпадающего списка
         $("#subjectsInput").setValue("English");
@@ -88,12 +90,13 @@ RegistrationPage registrationPage = new RegistrationPage();
         // СКРОЛ!!!! . ЕСЛИ НЕ СКРОЛИТ!!!!       $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
 
+        $("#city").click();
         $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
 
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Имя Фамилия"),
-                text("male@mail.ru"), text("16 April,1989"));
+        registrationPage.checkresultValue("Student Name", firstName + " " + lastName);
+
 
     }
 }
