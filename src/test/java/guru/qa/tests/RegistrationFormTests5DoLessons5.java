@@ -1,26 +1,30 @@
 package guru.qa.tests;
 
-        import com.codeborne.selenide.Configuration;
-        import org.junit.jupiter.api.BeforeAll;
-        import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-        import java.io.File;
+import java.io.File;
 
-        import static com.codeborne.selenide.Condition.text;
-        import static com.codeborne.selenide.Selectors.byClassName;
-        import static com.codeborne.selenide.Selectors.byText;
-        import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormTests5DoLessons5 {
-        @BeforeAll
-        static void beforAll(){
+    @BeforeAll
+    static void beforAll() {
         Configuration.startMaximized = true; // запуск теста в развернутом окне
         Configuration.pageLoadStrategy = ("none");
-        }
-        @Test
+        // если хотим задать размеры браузера:
+        //       Configuration.browserSize = "";
+    }
 
-        public void practiceForm(){
+    @Test
+
+    public void practiceForm() {
         open("https://demoqa.com/automation-practice-form");
+
         $("#firstName").setValue("Имя");
         $("#lastName").setValue("Фамилия");
         $("#userEmail").setValue("male@mail.ru");
@@ -56,7 +60,6 @@ public class RegistrationFormTests5DoLessons5 {
 //        $("#subjectsInput").setValue("English").pressEnter();
 
 
-
         $("#hobbiesWrapper").$(byText("Sports")).click();
 
         // загрузка файла по кнопке
@@ -70,16 +73,16 @@ public class RegistrationFormTests5DoLessons5 {
         $("#state").click();
         // СКРОЛ!!!! . ЕСЛИ НЕ СКРОЛИТ!!!!       $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
-                $("#city").click();
+        $("#city").click();
         $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
 
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Имя Фамилия"),
-        text("male@mail.ru"), text("16 April,1989"));
-                $(".table-responsive").$(byText("Student Name")).shouldHave(text("Имя Фамилия"));
-                $(".table-responsive").$(byText("Email")).shouldHave(text("male@mail.ru"));
-                $x("//td[text()='Student Name']").parent()
-                        .shouldHave(text("male@mail.ru"));
-        }
-        }
+                text("male@mail.ru"), text("16 April,1989"));
+        $(".table-responsive").$(byText("Student Name")).shouldHave(text("Имя Фамилия"));
+        $(".table-responsive").$(byText("Email")).shouldHave(text("male@mail.ru"));
+        $x("//td[text()='Student Name']").parent()
+                .shouldHave(text("male@mail.ru"));
+    }
+}

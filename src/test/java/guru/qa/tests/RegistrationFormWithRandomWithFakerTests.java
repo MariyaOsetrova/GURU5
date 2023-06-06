@@ -14,7 +14,7 @@ import static guru.qa.utils.RandomUtils.getRandomString;
 
 //import static guru.qa.tests.TestData;
 
-public class RegistrationFormWithRandomWithFakerTests extends TestBase{
+public class RegistrationFormWithRandomWithFakerTests extends TestBase {
     /*
     убрали в TestBase, и наследуем из него
     @BeforeAll
@@ -78,7 +78,6 @@ public class RegistrationFormWithRandomWithFakerTests extends TestBase{
         $(byClassName("subjects-auto-complete__menu")).click();
         // еще способ
 //        $("#subjectsInput").setValue("English").pressEnter();
-
 
 
         $("#hobbiesWrapper").$(byText("Sports")).click();
