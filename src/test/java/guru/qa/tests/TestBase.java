@@ -1,3 +1,4 @@
+// вынос в отдельный  класс переменных, база для тестов
 package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;

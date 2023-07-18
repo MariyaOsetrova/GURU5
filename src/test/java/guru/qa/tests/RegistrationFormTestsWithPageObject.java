@@ -1,3 +1,9 @@
+//PageObject
+/*PageObject— один из самых популярных паттернов проектирования кодовых баз веб-UI.
+        Часто этот паттерн называют Page Object Model (POM).
+        Такая модель проектирования подразумевает за собой объединение
+        элементов страницы в свойства класса, а способы взаимодействия с этими
+        элементами в методы.*/
 package guru.qa.tests;
 
 import guru.qa.pages.RegistrationPage;
@@ -36,10 +42,12 @@ RegistrationPage registrationPage = new RegistrationPage();
 // проверка что страница открылась
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         */
+        // использование патерна из registrationPage
         registrationPage.openPage(); // dspdfkb nj nxj e,hfkb
-
+// использование патерна из registrationPage
         registrationPage.typeFirstName(firstName)       // $("#firstName").setValue(firstName);
                         .typeLastName(lastName);//    $("#lastName").setValue(TestData.lastName); + в pages добавиди return this; //вернутся назад и можно опять вызывать методы
+
         $("#userEmail").setValue("male@mail.ru");
         //  $(byText("Привет"));
         $("#genterWrapper").$(byText("Male")).click(); // добавили клнкретики
@@ -95,6 +103,7 @@ RegistrationPage registrationPage = new RegistrationPage();
         $("#submit").click();
 
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
+        // проверка, убрали в паттерн  registrationPage в метод checkresultValue
         registrationPage.checkresultValue("Student Name", firstName + " " + lastName);
 
 
